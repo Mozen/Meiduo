@@ -12,11 +12,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-import os
+import os, sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+sys.path.insert(0, os.path.join(BASE_DIR,'apps'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users', # 用户
+    'content', # 主页
+    'verifications',
 ]
 
 MIDDLEWARE = [
@@ -113,18 +116,25 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/0",
+        "LOCATION": "redis://192.168.1.10:6379/0",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     },
     "session": {  # session
             "BACKEND": "django_redis.cache.RedisCache",
-            "LOCATION": "redis://127.0.0.1:6379/1",
+            "LOCATION": "redis://192.168.1.10:6379/1",
             "OPTIONS": {
                 "CLIENT_CLASS": "django_redis.client.DefaultClient",
             }
-    }
+    },
+    "verify_code": {  # session
+                "BACKEND": "django_redis.cache.RedisCache",
+                "LOCATION": "redis://192.168.1.10:6379/2",
+                "OPTIONS": {
+                    "CLIENT_CLASS": "django_redis.client.DefaultClient",
+                }
+        }
 }
 
 #
@@ -171,8 +181,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-
+# 静态文件路径
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 ## loger 配置工程日志
 LOGGING = {
@@ -215,3 +225,6 @@ LOGGING = {
         },
     }
 }
+
+# 继承自Django自带用户管理的定义部分
+AUTH_USER_MODEL = 'users.User'
