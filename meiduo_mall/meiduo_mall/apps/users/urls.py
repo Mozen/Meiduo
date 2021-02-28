@@ -12,5 +12,7 @@ urlpatterns = [
     # 手机号验证
     re_path(r'mobile/(?P<mobile>1[0-9]{10})/count',views.MobileCountView.as_view()),
     # 用户登陆视图
-    re_path(r'^login/$', views.LoginView.as_view(), name='login')
+    re_path(r'^login/$', views.LoginView.as_view(), name='login'),
+    # 用户推出登陆
+    re_path(r'^logout/$', views.LoginView.as_view(), name='logout')
 ]
