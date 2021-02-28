@@ -3,6 +3,7 @@ let vm = new Vue({
 	// 修改Vue读取变量的语法
     delimiters: ['[[', ']]'],
 	data: {  //数据对象
+        //v-model
 		username: '',		// 用户名
 		password: '', 		// 密码
 		password2: '',		// 确认密码
@@ -13,18 +14,22 @@ let vm = new Vue({
         image_code:'',
 		sms_code_tip: '获取短信验证码',
         sms_locked:false,
+        sms_code:'',
 
-
+        // v-show
 		error_name: false,
 		error_password: false,
 		error_password2: false,
 		error_mobile: false,
 		error_allow: false,
         error_image_code :false,
+        error_sms_code :false,
+
 
 		error_name_message: '',		// 用户名错误提示
 		error_mobile_message: '',	// 密码错误提示
         error_image_code_message:'',
+        error_sms_code_message:''
 	},
 
     mounted(){  //页面加载完会调用
@@ -72,17 +77,23 @@ let vm = new Vue({
                             }
                         }, 1000)
                         }else{
-                            if (response.data.code == '4001')
-                            {
-                                this.error_image_code_message = response.data.msg;
+                            if (response.data.code == '4001') {
+                                this.error_image_code_message = response.data.errmsg;
                                 this.error_image_code = true;
                                 this.sms_locked = false;
+                            }else{
+                                if (response.data.code == '4002'){
+                                    this.error_sms_code_message = response.data.errmsg;
+                                    this.error_sms_code = true;
+                                    this.sms_locked = false;
+                                }
                             }
                             this.send_flag = false;
                         }
                     })
                 .catch(error => {
                     console.log('22222',error.response);
+                    this.send_flag = false;
                     this.sms_locked = false;
                 })
         },
@@ -179,6 +190,17 @@ let vm = new Vue({
                 this.error_image_code = false;
             }
         },
+
+        // 校验短信验证码
+        check_sms_code() {
+            if (this.sms_code.length != 6) {
+                this.error_sms_code_message = '请输入短信验证码';
+                this.error_sms_code = true;
+            } else {
+                this.error_sms_code = false;
+            }
+        },
+
 		// 校验是否勾选协议
 		check_allow(){
 			if(!this.allow) {
@@ -194,9 +216,10 @@ let vm = new Vue({
 			this.check_password2();
 			this.check_mobile();
 			this.check_allow();
+			this.check_sms_code();
 
 			if(this.error_name == true || this.error_password == true || this.error_password2 == true
-				|| this.error_mobile == true || this.error_allow == true) {
+				|| this.error_mobile == true || this.error_allow == true || this.error_sms_code == true) {
                 // 禁用表单的提交
 				window.event.returnValue = false;
             }

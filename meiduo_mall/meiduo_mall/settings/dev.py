@@ -228,3 +228,4 @@ LOGGING = {
 
 # 继承自Django自带用户管理的定义部分
 AUTH_USER_MODEL = 'users.User'
+AUTHENTICATION_BACKENDS = ['users.utils.UserLoginBackend']
