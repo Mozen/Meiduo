@@ -17,7 +17,7 @@
 			    <div class="fr">
                     {% if user.is_authenticated %}
                        <div class="login_btn fl">
-                            欢迎您：<em>传智播客</em>
+                            欢迎您：<em>{{ user.username }}</em>
                             <span>|</span>
                             <a href="#">退出</a>
                        </div>
