@@ -13,6 +13,8 @@ urlpatterns = [
     re_path(r'mobile/(?P<mobile>1[0-9]{10})/count',views.MobileCountView.as_view()),
     # 用户登陆视图
     re_path(r'^login/$', views.LoginView.as_view(), name='login'),
-    # 用户推出登陆
-    re_path(r'^logout/$', views.LoginView.as_view(), name='logout')
+    # 用户退出登陆
+    re_path(r'^logout/$', views.LogoutView.as_view(), name='logout'),
+    # 用户中心
+    re_path(r'^info/$', views.UserInfoView.as_view(), name='info')
 ]

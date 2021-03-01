@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users', # 用户
     'content', # 主页
-    'verifications',
+    'verifications', # 用户认证
+    'oauth', # 第三方登陆
 ]
 
 MIDDLEWARE = [
@@ -228,4 +229,13 @@ LOGGING = {
 
 # 继承自Django自带用户管理的定义部分
 AUTH_USER_MODEL = 'users.User'
+
 AUTHENTICATION_BACKENDS = ['users.utils.UserLoginBackend']
+
+# 跳转到用户登陆页面
+LOGIN_URL = '/login/'
+
+# QQ 登陆配置信息
+QQ_CLIENT_ID = '101518219'
+QQ_CLIENT_SECRET = '418d84ebdc7241efb79536886ae95224'
+QQ_REDIRECT_URI = 'http://www.meiduo.site/oauth_callback'

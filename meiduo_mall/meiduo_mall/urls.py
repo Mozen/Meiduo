@@ -19,9 +19,11 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     # 用户类
-    path('',include('users.urls',namespace='user')),
+    path('',include('users.urls',namespace='users')),
     # 首页广告
     path('',include('content.urls',namespace='content')),
     # 图片验证码
-    path('', include('verifications.urls'))
+    path('', include('verifications.urls')),
+    # QQ 第三方登陆
+    path('', include('oauth.urls'))
 ]

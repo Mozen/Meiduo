@@ -11,7 +11,7 @@ def jinja2environment(**options):
     # 自定义语法 {{static('静态文件相对路径')}}{{url('路由的命名空间')}}
     env.globals.update({
         'static':static, # 获取静态文件前缀
-        'urls':reverse   # 重定向
+        'url':reverse   # 重定向
     })
     
     return env
