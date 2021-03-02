@@ -16,5 +16,7 @@ urlpatterns = [
     # 用户退出登陆
     re_path(r'^logout/$', views.LogoutView.as_view(), name='logout'),
     # 用户中心
-    re_path(r'^info/$', views.UserInfoView.as_view(), name='info')
+    re_path(r'^info/$', views.UserInfoView.as_view(), name='info'),
+    # 保存邮箱
+    re_path(r'^emails/$', views.EmailSaveView.as_view(), name='email'),
 ]
