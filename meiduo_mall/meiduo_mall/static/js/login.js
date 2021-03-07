@@ -46,6 +46,7 @@ let vm = new Vue({
             axios.get(url, {
                 responseType: 'json'
             })
+
                 .then(response => {
                     location.href = response.data.login_url;
                 })

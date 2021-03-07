@@ -18,5 +18,19 @@ urlpatterns = [
     # 用户中心
     re_path(r'^info/$', views.UserInfoView.as_view(), name='info'),
     # 保存邮箱
-    re_path(r'^emails/$', views.EmailSaveView.as_view(), name='email'),
+    re_path(r'^emails/$', views.EmailSaveView.as_view(), name='send_email'),
+    # 激活邮箱
+    re_path(r'^emails/verification/$', views.VerifyEmailView.as_view(), name='send_email'),
+    # 保存收货地址
+    re_path(r'^addresses/create/$', views.AddressCreateView.as_view()),
+    # 展示收货地址
+    re_path(r'^addresses/$', views.ShowAddressView.as_view(), name='address'),
+    # 修改地址
+    re_path(r'^addresses/(?P<address_id>\d+)/$', views.UpdateDestroyAddressView.as_view()),
+    # 设置默认地
+    re_path(r'^addresses/(?P<address_id>\d+)/default/$', views.SetDefaultAddressView.as_view()),
+    # 设置地址标题
+    re_path(r'^addresses/(?P<address_id>\d+)/title/$', views.ChangeTitleView.as_view()),
+    # 修改密码
+    re_path(r'^pass/$', views.PasswordView.as_view(), name='pass'),
 ]

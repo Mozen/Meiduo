@@ -25,5 +25,7 @@ urlpatterns = [
     # 图片验证码
     path('', include('verifications.urls')),
     # QQ 第三方登陆
-    path('', include('oauth.urls'))
+    path('', include('oauth.urls')),
+    # address 用户地址
+    path('', include('address.urls')),
 ]

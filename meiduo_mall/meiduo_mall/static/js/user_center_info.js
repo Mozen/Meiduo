@@ -59,6 +59,7 @@ let vm = new Vue({
                             this.send_email_btn_disabled = true;
                             this.send_email_tip = '已发送验证邮件';
                         } else if (response.data.code == '4101') {
+
                             location.href = '/login/?next=/info/';
                         } else {
                             alert(response.data.errmsg);
